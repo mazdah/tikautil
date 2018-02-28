@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
+
 
 /**
  * Hello world!
@@ -15,18 +17,19 @@ public class App
     {
         System.out.println( "Hello World!" );
         
-      //assume example.mp3 is in your current directory
-        File file = new File("sample.xls");//
+      //Assume sample.txt is in your current directory		        
+        File file = new File("sample.xls");
         
-        //Instantiating tika facade class 
+        //Instantiating Tika facade class
         Tika tika = new Tika();
-        
-        //detecting the file type using detect method
-        String filetype;
+        String filecontent;
 		try {
-			filetype = tika.detect(file);
-			System.out.println("FILE TYPE = " + filetype);
+			filecontent = tika.parseToString(file);
+			System.out.println("Extracted Content: " + filecontent);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TikaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
